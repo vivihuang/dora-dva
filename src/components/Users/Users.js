@@ -7,7 +7,10 @@ import { PAGE_SIZE } from '../../constants'
 
 const Users = ({ dispatch, list: dataSource, total, page: current, loading }) => {
   const deleteHandler = (id) => {
-    console.warn(`TODO: ${id}`)
+    dispatch({
+      type: 'users/remove',
+      payload: { id }
+    })
   }
 
   const pageChangeHandler = (page) => {
