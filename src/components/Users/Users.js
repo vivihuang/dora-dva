@@ -1,12 +1,19 @@
 import React from 'react'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
-import { Table, Pagination, Popconfirm } from 'antd'
+import { Table, Pagination, Popconfirm, Button } from 'antd'
 import styles from './Users.css'
 import { PAGE_SIZE } from '../../constants'
 import UserEditModal from './UserEditModal'
 
 const Users = ({ dispatch, list: dataSource, total, page: current, loading }) => {
+  const createHandler = (values) => {
+    dispatch({
+      type: 'users/create',
+      payload: { values }
+    })
+  }
+
   const editHandler = (id, values) => {
     dispatch({
       type: 'users/patch',
@@ -63,6 +70,11 @@ const Users = ({ dispatch, list: dataSource, total, page: current, loading }) =>
 
   return (
     <div className={styles.normal}>
+      <div className={styles.create}>
+        <UserEditModal record={{}} onOk={createHandler}>
+          <Button type='primary'>Create User</Button>
+        </UserEditModal>
+      </div>
       <div>
         <Table
           columns={columns}
