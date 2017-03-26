@@ -4,8 +4,16 @@ import { routerRedux } from 'dva/router'
 import { Table, Pagination, Popconfirm } from 'antd'
 import styles from './Users.css'
 import { PAGE_SIZE } from '../../constants'
+import UserEditModal from './UserEditModal'
 
 const Users = ({ dispatch, list: dataSource, total, page: current, loading }) => {
+  const editHandler = (id, values) => {
+    dispatch({
+      type: 'users/patch',
+      payload: { id, values }
+    })
+  }
+
   const deleteHandler = (id) => {
     dispatch({
       type: 'users/remove',
@@ -40,10 +48,12 @@ const Users = ({ dispatch, list: dataSource, total, page: current, loading }) =>
     {
       title: 'Operation',
       key: 'operation',
-      render: (text, { id }) => (
+      render: (text, record) => (
         <span className={styles.operation}>
-          <a href=''>Edit</a>
-          <Popconfirm title='Confirm to delete?' onConfirm={deleteHandler.bind(null, id)}>
+          <UserEditModal record={record} onOk={editHandler.bind(null, record.id)}>
+             <a>Edit</a>
+          </UserEditModal>
+          <Popconfirm title='Confirm to delete?' onConfirm={deleteHandler.bind(null, record.id)}>
             <a href=''>Delete</a>
           </Popconfirm>
         </span>
