@@ -4,7 +4,7 @@ import { Table, Pagination, Popconfirm } from 'antd'
 import styles from './Users.css'
 import { PAGE_SIZE } from '../../constants'
 
-const Users = ({ list: dataSource, total, page: current }) => {
+const Users = ({ list: dataSource, total, page: current, loading }) => {
   const deleteHandler = (id) => {
     console.warn(`TODO: ${id}`)
   }
@@ -14,7 +14,7 @@ const Users = ({ list: dataSource, total, page: current }) => {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => <a href="">{text}</a>,
+      render: text => <a href=''>{text}</a>,
     },
     {
       title: 'Email',
@@ -31,9 +31,9 @@ const Users = ({ list: dataSource, total, page: current }) => {
       key: 'operation',
       render: (text, { id }) => (
         <span className={styles.operation}>
-          <a href="">Edit</a>
-          <Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, id)}>
-            <a href="">Delete</a>
+          <a href=''>Edit</a>
+          <Popconfirm title='Confirm to delete?' onConfirm={deleteHandler.bind(null, id)}>
+            <a href=''>Delete</a>
           </Popconfirm>
         </span>
       )
@@ -46,11 +46,12 @@ const Users = ({ list: dataSource, total, page: current }) => {
         <Table
           columns={columns}
           dataSource={dataSource}
+          loading={loading}
           rowKey={record => record.id}
           pagination={false}
         />
         <Pagination
-          className="ant-table-pagination"
+          className='ant-table-pagination'
           total={total}
           current={current}
           pageSize={PAGE_SIZE}
@@ -62,10 +63,12 @@ const Users = ({ list: dataSource, total, page: current }) => {
 
 const mapStateToProps = (state) => {
   const { list, total, page } = state.users
+  const { models: { users } } = state.loading
   return {
     list,
     total,
-    page
+    page,
+    loading: users
   }
 }
 
