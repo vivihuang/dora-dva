@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Menu, Icon } from 'antd'
 import { Link } from 'dva/router'
 
@@ -18,9 +18,13 @@ const Header = ({ location }) => (
       <Link to='/page-you-dont-know'><Icon type='frown-circle' />404</Link>
     </Menu.Item>
     <Menu.Item key='/antd'>
-      <a href='https://github.com/dvajs/dva' target='_blank'>dva</a>
+      <a href='https://github.com/dvajs/dva' target='_blank' rel='noopener noreferrer'>dva</a>
     </Menu.Item>
   </Menu>
 )
+
+Header.propTypes = {
+  location: PropTypes.shape({}).isRequired
+}
 
 export default Header

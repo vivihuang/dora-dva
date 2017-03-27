@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import styles from './NoMatch.css'
 import MainLayout from '../components/MainLayout/MainLayout'
 
-const NoMatch = () => (
+const NoMatch = ({ location }) => (
   <MainLayout location={location}>
     <div className={styles.normal}>
       <div className={styles.content}>
@@ -11,5 +11,9 @@ const NoMatch = () => (
     </div>
   </MainLayout>
 )
+
+NoMatch.propTypes = {
+  location: PropTypes.shape({}).isRequired
+}
 
 export default NoMatch

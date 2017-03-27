@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import styles from './MainLayout.css'
 import Header from './Header'
 
@@ -12,5 +12,10 @@ const MainLayout = ({ children, location }) => (
     </div>
   </div>
 )
+
+MainLayout.propTypes = {
+  location: PropTypes.shape({}).isRequired,
+  children: PropTypes.element
+}
 
 export default MainLayout

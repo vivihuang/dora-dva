@@ -20,8 +20,8 @@ export default {
         payload: {
           data,
           total: parseInt(headers['x-total-count'], 10),
-          page: parseInt(page, 10),
-        },
+          page: parseInt(page, 10)
+        }
       })
     },
     *remove({ payload: { id } }, { call, put }) {
@@ -36,7 +36,7 @@ export default {
       yield call(usersService.create, values)
       yield put({ type: 'reload' })
     },
-    *reload({}, { select, put }) {
+    *reload(action, { select, put }) {
       const page = yield select(state => state.users.page)
       yield put({ type: 'fetch', payload: { page } })
     }

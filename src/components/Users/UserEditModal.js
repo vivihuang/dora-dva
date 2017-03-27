@@ -1,49 +1,46 @@
-import React, { Component } from 'react';
-import { Modal, Form, Input } from 'antd';
-import styles from './UserEditModal.css';
+import React, { Component, PropTypes } from 'react'
+import { Modal, Form, Input } from 'antd'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 class UserEditModal extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      visible: false,
-    };
+      visible: false
+    }
   }
 
   showModelHandler = (e) => {
-    if (e) e.stopPropagation();
+    if (e) e.stopPropagation()
     this.setState({
-      visible: true,
-    });
-  };
+      visible: true
+    })
+  }
 
   hideModelHandler = () => {
     this.setState({
-      visible: false,
-    });
-  };
+      visible: false
+    })
+  }
 
   okHandler = () => {
-    const { onOk } = this.props;
-    this.props.form.validateFields((err, values) => {
+    const { onOk, form } = this.props
+    form.validateFields((err, values) => {
       if (!err) {
-        onOk(values);
-        this.hideModelHandler();
+        onOk(values)
+        this.hideModelHandler()
       }
-    });
-  };
+    })
+  }
 
   render() {
-    const { children } = this.props;
-    const { getFieldDecorator } = this.props.form;
-    const { name, email, website } = this.props.record;
+    const { children, form: { getFieldDecorator }, record: { name, email, website } } = this.props
     const formItemLayout = {
       labelCol: { span: 6 },
-      wrapperCol: { span: 14 },
-    };
+      wrapperCol: { span: 14 }
+    }
 
     return (
       <span>
@@ -51,7 +48,7 @@ class UserEditModal extends Component {
           { children }
         </span>
         <Modal
-          title="Edit User"
+          title='Edit User'
           visible={this.state.visible}
           onOk={this.okHandler}
           onCancel={this.hideModelHandler}
@@ -59,39 +56,46 @@ class UserEditModal extends Component {
           <Form layout='horizontal' onSubmit={this.okHandler}>
             <FormItem
               {...formItemLayout}
-              label="Name"
+              label='Name'
             >
               {
                 getFieldDecorator('name', {
-                  initialValue: name,
+                  initialValue: name
                 })(<Input />)
               }
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Email"
+              label='Email'
             >
               {
                 getFieldDecorator('email', {
-                  initialValue: email,
+                  initialValue: email
                 })(<Input />)
               }
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Website"
+              label='Website'
             >
               {
                 getFieldDecorator('website', {
-                  initialValue: website,
+                  initialValue: website
                 })(<Input />)
               }
             </FormItem>
           </Form>
         </Modal>
       </span>
-    );
+    )
   }
+}
+
+UserEditModal.propTypes = {
+  record: PropTypes.shape({}),
+  onOk: PropTypes.func.isRequired,
+  form: PropTypes.shape({}),
+  children: PropTypes.element
 }
 
 export default Form.create()(UserEditModal)

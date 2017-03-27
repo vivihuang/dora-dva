@@ -1,14 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-const Example = () => {
-  return (
-    <div>
-      Example
-    </div>
-  );
-};
+const Example = () => (
+  <div>Example</div>
+)
 
-Example.propTypes = {
-};
-
-export default Example;
+export default Example

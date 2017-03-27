@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import styles from './Users.css'
 import UsersComponent from '../components/Users/Users'
@@ -11,5 +11,9 @@ const Users = ({ location }) => (
     </div>
   </MainLayout>
 )
+
+Users.propTypes = {
+  location: PropTypes.shape({}).isRequired
+}
 
 export default connect()(Users)

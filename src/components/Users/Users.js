@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import { Table, Pagination, Popconfirm, Button } from 'antd'
@@ -40,17 +40,17 @@ const Users = ({ dispatch, list: dataSource, total, page: current, loading }) =>
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => <a href=''>{text}</a>,
+      render: text => <a href=''>{text}</a>
     },
     {
       title: 'Email',
       dataIndex: 'email',
-      key: 'email',
+      key: 'email'
     },
     {
       title: 'Website',
       dataIndex: 'website',
-      key: 'website',
+      key: 'website'
     },
     {
       title: 'Operation',
@@ -58,7 +58,7 @@ const Users = ({ dispatch, list: dataSource, total, page: current, loading }) =>
       render: (text, record) => (
         <span className={styles.operation}>
           <UserEditModal record={record} onOk={editHandler.bind(null, record.id)}>
-             <a>Edit</a>
+            <a>Edit</a>
           </UserEditModal>
           <Popconfirm title='Confirm to delete?' onConfirm={deleteHandler.bind(null, record.id)}>
             <a href=''>Delete</a>
@@ -104,6 +104,14 @@ const mapStateToProps = (state) => {
     page,
     loading: users
   }
+}
+
+Users.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  total: PropTypes.number,
+  page: PropTypes.number,
+  loading: PropTypes.bool.isRequired
 }
 
 export default connect(mapStateToProps)(Users)
