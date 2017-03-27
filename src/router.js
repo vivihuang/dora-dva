@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react'
 import { Router, Route } from 'dva/router'
 import IndexPage from './routes/IndexPage'
 
-import Users from './routes/Users.js'
-import NoMatch from './routes/NoMatch.js'
+import Users from './routes/Users'
+import NoMatch from './routes/NoMatch'
 
 const RouterConfig = ({ history }) => (
   <Router history={history}>

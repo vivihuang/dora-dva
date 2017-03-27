@@ -26,10 +26,14 @@ class UserEditModal extends Component {
   }
 
   okHandler = () => {
-    const { onOk, form } = this.props
+    const { record, onOk, form } = this.props
     form.validateFields((err, values) => {
       if (!err) {
-        onOk(values)
+        if (record && record.id) {
+          onOk(record.id, values)
+        } else {
+          onOk(values)
+        }
         this.hideModelHandler()
       }
     })

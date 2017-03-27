@@ -57,10 +57,10 @@ const Users = ({ dispatch, list: dataSource, total, page: current, loading }) =>
       key: 'operation',
       render: (text, record) => (
         <span className={styles.operation}>
-          <UserEditModal record={record} onOk={editHandler.bind(null, record.id)}>
+          <UserEditModal record={record} onOk={editHandler}>
             <a>Edit</a>
           </UserEditModal>
-          <Popconfirm title='Confirm to delete?' onConfirm={deleteHandler.bind(null, record.id)}>
+          <Popconfirm title='Confirm to delete?' onConfirm={() => { deleteHandler(record.id) }}>
             <a href=''>Delete</a>
           </Popconfirm>
         </span>

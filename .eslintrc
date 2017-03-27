@@ -1,32 +1,19 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    "generator-star-spacing": [0],
-    "consistent-return": [0],
-    "react/forbid-prop-types": [0],
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-    "global-require": [1],
-    "react/jsx-no-bind": [0],
-    "react/prefer-stateless-function": [0],
-    "no-else-return": [0],
-    "no-restricted-syntax": [0],
-    "no-use-before-define": [0],
-    "no-nested-ternary": [0],
-    "arrow-body-style": [0],
-    "import/extensions": [0],
-    "no-bitwise": [0],
-    "no-cond-assign": [0],
-    "import/no-unresolved": [0],
-    "require-yield": [1],
     "semi": ["error", "never"],
     "comma-dangle": ["error", "never"],
     "jsx-quotes": ["error", "prefer-single"],
+    "react/jsx-filename-extension": ["off"],
     "react/no-find-dom-node": ["off"],
     "react/prop-types": ["error"],
-    "no-underscore-dangle": ["error", { "allow": ["__INITIAL_STATE__"] }],
+    "no-underscore-dangle": ["error", { "allow": [] }],
     "class-methods-use-this": ["off"],
-    "import/no-extraneous-dependencies": ["off"],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/mock/**/**.js"]}],
     "no-shadow": ["off"],
     "import/prefer-default-export": ["off"],
     "jsx-a11y/no-static-element-interactions": ["off"],
@@ -34,6 +21,8 @@
     "react/require-default-props": ["off"]
   },
   "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     }
