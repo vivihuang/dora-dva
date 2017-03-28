@@ -6,6 +6,7 @@ import './index.css'
 const app = dva()
 
 app.model(require('./models/users'))
+app.model(require('./models/auth'))
 
 // 2. Plugins
 // app.use({})
