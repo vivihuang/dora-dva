@@ -1,23 +1,15 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'dva'
+import React from 'react'
 import styles from './IndexPage.css'
-import MainLayout from '../components/MainLayout/MainLayout'
 
-const IndexPage = ({ location }) => (
-  <MainLayout location={location}>
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to dva!</h1>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
-        <li><a href='https://github.com/dvajs/dva-docs/blob/master/v1/en-us/getting-started.md'>Getting Started</a></li>
-      </ul>
-    </div>
-  </MainLayout>
+const IndexPage = () => (
+  <div className={styles.normal}>
+    <h1 className={styles.title}>Yay! Welcome to dva!</h1>
+    <div className={styles.welcome} />
+    <ul className={styles.list}>
+      <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
+      <li><a href='https://github.com/dvajs/dva-docs/blob/master/v1/en-us/getting-started.md'>Getting Started</a></li>
+    </ul>
+  </div>
 )
 
-IndexPage.propTypes = {
-  location: PropTypes.shape({}).isRequired
-}
-
-export default connect()(IndexPage)
+export default IndexPage
