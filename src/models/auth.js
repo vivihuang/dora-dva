@@ -1,4 +1,5 @@
 import { routerRedux } from 'dva/router'
+import * as authService from '../services/auth'
 
 export default {
   namespace: 'auth',
@@ -21,6 +22,13 @@ export default {
       } else if (!token && auth) {
         yield put({ type: 'authFailed' })
         yield put(routerRedux.push('/login'))
+      }
+    },
+    * login({ payload: { values } }, { call, put }) {
+      const { data } = yield call(authService.login, values)
+      if (data.token) {
+        yield put({ type: 'authSucceed', payload: { token: data.token } })
+        yield put(routerRedux.push('/'))
       }
     }
   },
