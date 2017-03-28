@@ -1,0 +1,10 @@
+
+.normal {
+  display: flex;
+  flex-direction: column;
+}
+
+h3, .submitBtn {
+  display: block;
+  margin: 0 auto 20px;
+}
