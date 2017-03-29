@@ -30,6 +30,10 @@ export default {
         yield put({ type: 'authSucceed', payload: { token: data.token } })
         yield put(routerRedux.push('/'))
       }
+    },
+    * logout(action, { put }) {
+      yield put({ type: 'authFailed' })
+      yield put(routerRedux.push('/login'))
     }
   },
   subscriptions: {
