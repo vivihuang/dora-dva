@@ -1,34 +1,26 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import styles from './Login.css'
 
 import LoginForm from './LoginForm'
 
-class Login extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired
-  }
-
-  constructor(props) {
-    super(props)
-    this.handleLogin = this.handleLogin.bind(this)
-  }
-
-  handleLogin(values) {
-    const { dispatch } = this.props
+const Login = ({ dispatch }) => {
+  const handleLogin = (values) => {
     dispatch({ type: 'auth/login', payload: { values } })
   }
 
-  render() {
-    return (
-      <div className={styles.normal}>
-        <LoginForm
-          className={styles.loginForm}
-          handleLogin={this.handleLogin}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className={styles.normal}>
+      <LoginForm
+        className={styles.loginForm}
+        handleLogin={handleLogin}
+      />
+    </div>
+  )
+}
+
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(Login)
