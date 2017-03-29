@@ -1,13 +1,16 @@
 import fetch from 'dva/fetch'
+import ErrorCode from '../constants/ErrorCode'
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
-    return response
+    return response.json()
   }
 
-  const error = new Error(response.statusText)
-  error.response = response
-  throw error
+  return response.text().then((text) => {
+    const error = text ? JSON.parse(text) : null
+    const errorCode = error || ErrorCode[response.status] || ErrorCode.others
+    return new Error(errorCode)
+  })
 }
 
 /**
@@ -20,9 +23,7 @@ const checkStatus = (response) => {
 export const request = async (url, options = null) => {
   const response = await fetch(url, options)
 
-  checkStatus(response)
-
-  const data = await response.json()
+  const data = await checkStatus(response)
 
   const ret = {
     data,
