@@ -4,7 +4,11 @@ import styles from './Login.css'
 
 import LoginForm from './LoginForm'
 
-const Login = ({ dispatch }) => {
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+const Login = ({ dispatch, auth }) => {
   const handleLogin = (values) => {
     dispatch({ type: 'auth/login', payload: { values } })
   }
@@ -13,6 +17,7 @@ const Login = ({ dispatch }) => {
     <div className={styles.normal}>
       <LoginForm
         className={styles.loginForm}
+        errorMsg={auth.error}
         handleLogin={handleLogin}
       />
     </div>
@@ -20,7 +25,8 @@ const Login = ({ dispatch }) => {
 }
 
 Login.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  auth: PropTypes.shape({}).isRequired
 }
 
-export default connect()(Login)
+export default connect(mapStateToProps)(Login)

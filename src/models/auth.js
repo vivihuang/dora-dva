@@ -4,13 +4,17 @@ import * as authService from '../services/auth'
 export default {
   namespace: 'auth',
   state: {
-    token: null
+    token: null,
+    error: null
   },
   reducers: {
     authSucceed(state, { payload: { token } }) {
-      return { ...state, token }
+      return { ...state, token, error: null }
     },
-    authFailed(state) {
+    authFailed(state, { payload: { error } }) {
+      return { ...state, token: null, error }
+    },
+    removeToken(state) {
       return { ...state, token: null }
     }
   },
@@ -20,19 +24,20 @@ export default {
       if (token && !auth) {
         yield put(routerRedux.push('/'))
       } else if (!token && auth) {
-        yield put({ type: 'authFailed' })
         yield put(routerRedux.push('/login'))
       }
     },
     * login({ payload: { values } }, { call, put }) {
       const { data } = yield call(authService.login, values)
-      if (data.token) {
+      if (data instanceof Error) {
+        yield put({ type: 'authFailed', payload: { error: data.message } })
+      } else if (data.token) {
         yield put({ type: 'authSucceed', payload: { token: data.token } })
         yield put(routerRedux.push('/'))
       }
     },
     * logout(action, { put }) {
-      yield put({ type: 'authFailed' })
+      yield put({ type: 'removeToken' })
       yield put(routerRedux.push('/login'))
     }
   },

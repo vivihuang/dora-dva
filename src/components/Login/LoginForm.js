@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import { Form, Input, Button } from 'antd'
 import classnames from 'classnames'
-import styles from './LoginForm.css'
+import styles from './LoginForm.less'
 
-const LoginForm = ({ className, handleLogin, form }) => {
+const LoginForm = ({ className, handleLogin, form, errorMsg }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     form.validateFields((err, values) => {
@@ -16,6 +16,7 @@ const LoginForm = ({ className, handleLogin, form }) => {
   return (
     <div className={classnames(styles.normal, className)}>
       <h3>Hello. Welcome to login.</h3>
+      {errorMsg ? <span className={styles.errorMsg}>{errorMsg}</span> : null}
       <Form onSubmit={handleSubmit}>
         <Form.Item >
           {form.getFieldDecorator('email', {
@@ -42,7 +43,8 @@ const LoginForm = ({ className, handleLogin, form }) => {
 LoginForm.propTypes = {
   className: PropTypes.string,
   handleLogin: PropTypes.func.isRequired,
-  form: PropTypes.shape({})
+  form: PropTypes.shape({}),
+  errorMsg: PropTypes.string
 }
 
 export default Form.create()(LoginForm)
