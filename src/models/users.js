@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import * as usersService from '../services/users'
 
 export default {
@@ -26,14 +27,17 @@ export default {
     },
     * remove({ payload: { id } }, { call, put }) {
       yield call(usersService.remove, id)
+      message.success('Delete succeed.')
       yield put({ type: 'reload' })
     },
     * patch({ payload: { id, values } }, { call, put }) {
       yield call(usersService.patch, id, values)
+      message.success('Edit succeed.')
       yield put({ type: 'reload' })
     },
     * create({ payload: { values } }, { call, put }) {
       yield call(usersService.create, values)
+      message.success('Create succeed.')
       yield put({ type: 'reload' })
     },
     * reload(action, { select, put }) {
