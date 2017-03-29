@@ -3,7 +3,7 @@ import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import { Table, Pagination, Popconfirm, Button } from 'antd'
 import styles from './Users.css'
-import { PAGE_SIZE } from '../../constants'
+import { PAGE_SIZE } from '../../constants/Users'
 import UserEditModal from './UserEditModal'
 
 const Users = ({ dispatch, list: dataSource, total, page: current, loading }) => {
