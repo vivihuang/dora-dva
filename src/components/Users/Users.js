@@ -2,30 +2,22 @@ import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import { Table, Pagination, Popconfirm, Button } from 'antd'
+import * as usersActions from '../../actions/users'
 import styles from './Users.css'
 import { PAGE_SIZE } from '../../constants/Users'
 import UserEditModal from './UserEditModal'
 
 const Users = ({ dispatch, list: dataSource, total, page: current, loading }) => {
   const createHandler = (values) => {
-    dispatch({
-      type: 'users/create',
-      payload: { values }
-    })
+    dispatch(usersActions.wrapNamespace(usersActions.create, values))
   }
 
   const editHandler = (id, values) => {
-    dispatch({
-      type: 'users/patch',
-      payload: { id, values }
-    })
+    dispatch(usersActions.wrapNamespace(usersActions.patch, id, values))
   }
 
   const deleteHandler = (id) => {
-    dispatch({
-      type: 'users/remove',
-      payload: { id }
-    })
+    dispatch(usersActions.wrapNamespace(usersActions.remove, id))
   }
 
   const pageChangeHandler = (page) => {
