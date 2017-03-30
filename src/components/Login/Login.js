@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'dva'
+import * as authActions from '../../actions/auth'
 import styles from './Login.css'
 
 import LoginForm from './LoginForm'
@@ -10,7 +11,7 @@ const mapStateToProps = state => ({
 
 const Login = ({ dispatch, auth }) => {
   const handleLogin = (values) => {
-    dispatch({ type: 'auth/login', payload: { values } })
+    dispatch(authActions.wrapNamespace(authActions.login, values))
   }
 
   return (

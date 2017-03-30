@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import { Menu, Icon } from 'antd'
 import { Link } from 'dva/router'
+import * as authActions from '../../actions/auth'
 
 import styles from './Header.css'
 
 const Header = ({ dispatch, location }) => {
   const logout = () => {
-    dispatch({ type: 'auth/logout' })
+    dispatch(authActions.wrapNamespace(authActions.logout))
   }
 
   return (

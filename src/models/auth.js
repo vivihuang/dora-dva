@@ -1,51 +1,55 @@
 import { routerRedux } from 'dva/router'
+import { handleActions } from '../utils/actionsHelper'
 import * as authService from '../services/auth'
+import * as authActions from '../actions/auth'
 
 export default {
-  namespace: 'auth',
+  namespace: authActions.NAMESPACE,
   state: {
     token: null,
     error: null
   },
-  reducers: {
-    authSucceed(state, { payload: { token } }) {
+  reducers: handleActions((on) => {
+    on(authActions.authSucceed, (state, action) => {
+      const { token } = action.payload
       return { ...state, token, error: null }
-    },
-    authFailed(state, { payload: { error } }) {
+    })
+    on(authActions.authFailed, (state, action) => {
+      const { error } = action.payload
       return { ...state, token: null, error }
-    },
-    removeToken(state) {
-      return { ...state, token: null }
-    }
-  },
-  effects: {
-    * checkAuth({ payload: { auth } }, { select, put }) {
+    })
+    on(authActions.removeToken, state => ({ ...state, token: null }))
+  }),
+  effects: handleActions((on) => {
+    on(authActions.checkAuth, function* (action, { select, put }) {
+      const { auth } = action.payload
       const token = yield select(state => state.auth.token)
       if (token && !auth) {
         yield put(routerRedux.push('/'))
       } else if (!token && auth) {
         yield put(routerRedux.push('/login'))
       }
-    },
-    * login({ payload: { values } }, { call, put }) {
+    })
+    on(authActions.login, function* (action, { call, put }) {
+      const { values } = action.payload
       const { data } = yield call(authService.login, values)
       if (data instanceof Error) {
-        yield put({ type: 'authFailed', payload: { error: data.message } })
+        yield put(authActions.authFailed(null, data.message))
       } else if (data.token) {
-        yield put({ type: 'authSucceed', payload: { token: data.token } })
+        yield put(authActions.authSucceed(null, data.token))
         yield put(routerRedux.push('/'))
       }
-    },
-    * logout(action, { put }) {
-      yield put({ type: 'removeToken' })
+    })
+    on(authActions.logout, function* (action, { put }) {
+      yield put(authActions.removeToken())
       yield put(routerRedux.push('/login'))
-    }
-  },
+    })
+  }),
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         const auth = pathname !== '/login'
-        dispatch({ type: 'checkAuth', payload: { auth } })
+        dispatch(authActions.checkAuth(null, auth))
       })
     }
   }
