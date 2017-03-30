@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Form, Input, Button } from 'antd'
 import classnames from 'classnames'
-import styles from './LoginForm.less'
+import styles from './LoginForm.scss'
 
 const LoginForm = ({ className, handleLogin, form, errorMsg }) => {
   const handleSubmit = (e) => {
