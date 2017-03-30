@@ -1,20 +1,27 @@
 {
   "private": true,
   "scripts": {
-    "start": "roadhog server",
-    "build": "roadhog build",
+    "start": "babel-node build/dev-server.js",
+    "build": "webpack --profile --colors --config build/webpack.release.config.babel.js",
     "test": "ava",
     "lint": "eslint --ext .js src test",
     "precommit": "lint-staged",
     "lint-staged": "lint-staged"
   },
   "ava": {
+    "babel": "inherit",
     "files": [
       "src/**/*.spec.js"
     ],
     "source": [
       "src/**/*.{js}",
       "!dist/**/*"
+    ],
+    "failFast": true,
+    "tap": true,
+    "require": [
+      "babel-register",
+      "babel-polyfill"
     ]
   },
   "lint-staged": {
@@ -27,7 +34,6 @@
   },
   "dependencies": {
     "antd": "^2.8.2",
-    "babel-runtime": "^6.9.2",
     "classnames": "^2.2.5",
     "dva": "^1.2.1",
     "dva-loading": "^0.2.0",
@@ -37,21 +43,49 @@
   },
   "devDependencies": {
     "ava": "^0.18.2",
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
     "babel-eslint": "^7.1.1",
-    "babel-plugin-dva-hmr": "^0.3.2",
+    "babel-loader": "^6.4.1",
     "babel-plugin-import": "^1.1.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.24.0",
+    "babel-runtime": "^6.23.0",
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
+    "eslint-loader": "^1.7.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "expect": "^1.20.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
     "husky": "^0.12.0",
     "lint-staged": "^3.4.0",
+    "node-sass": "^4.5.2",
+    "postcss": "^5.2.16",
+    "postcss-loader": "^1.3.3",
     "redbox-react": "^1.3.2",
     "roadhog": "^0.5.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
     "stylelint": "^7.9.0",
-    "stylelint-config-standard": "^16.0.0"
+    "stylelint-config-standard": "^16.0.0",
+    "url-loader": "^0.5.8",
+    "webfonts-loader": "^1.0.1",
+    "webpack": "^2.3.2",
+    "webpack-dashboard": "^0.3.0",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-hot-middleware": "^2.17.1"
   }
 }
