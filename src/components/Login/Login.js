@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import * as authActions from '../../actions/auth'
-import styles from './Login.css'
+import styles from './Login.scss'
 
 import LoginForm from './LoginForm'
 
