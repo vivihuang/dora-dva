@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './NoMatch.css'
+import styles from './NoMatch.scss'
 
 const NoMatch = () => (
   <div className={styles.normal}>

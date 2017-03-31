@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './IndexPage.css'
+import styles from './IndexPage.scss'
 
 const IndexPage = () => (
   <div className={styles.normal}>

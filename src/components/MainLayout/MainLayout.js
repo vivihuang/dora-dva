@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import styles from './MainLayout.css'
+import styles from './MainLayout.scss'
 import Header from './Header'
 
 const MainLayout = ({ children, location }) => (

@@ -3,7 +3,7 @@ import { connect } from 'dva'
 import { routerRedux } from 'dva/router'
 import { Table, Pagination, Popconfirm, Button } from 'antd'
 import * as usersActions from '../../actions/users'
-import styles from './Users.css'
+import styles from './Users.scss'
 import { PAGE_SIZE } from '../../constants/Users'
 import UserEditModal from './UserEditModal'
 
@@ -61,7 +61,7 @@ const Users = ({ dispatch, list: dataSource, total, page: current, loading }) =>
   ]
 
   return (
-    <div className={styles.normal}>
+    <div>
       <div className={styles.create}>
         <UserEditModal record={{}} onOk={createHandler}>
           <Button type='primary'>Create User</Button>
