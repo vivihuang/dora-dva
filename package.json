@@ -27,7 +27,8 @@
   "lint-staged": {
     "src/**/*.js": "lint",
     "src/**/*.less": "stylelint --syntax less",
-    "src/**/*.css": "stylelint"
+    "src/**/*.css": "stylelint",
+    "src/**/*.scss": "stylelint --syntax scss"
   },
   "engines": {
     "install-node": "6.9.2"
