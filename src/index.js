@@ -1,6 +1,6 @@
 import dva from 'dva'
 import createLoading from 'dva-loading'
-import './index.css'
+import './index.scss'
 
 import routers from './router'
 import usersModel from './models/users'
