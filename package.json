@@ -5,7 +5,8 @@
     "build": "webpack --profile --colors --config build/webpack.release.config.babel.js",
     "test": "NODE_ENV=test ava",
     "lint": "eslint --ext .js src test",
-    "precommit": "lint-staged",
+    "precommit": "lint-staged && yarn test",
+    "prepush": "lint-staged && yarn test",
     "lint-staged": "lint-staged"
   },
   "ava": {
